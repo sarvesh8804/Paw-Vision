@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -24,6 +25,16 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				jungle: {
+					canopy: '#2D5E40',
+					leaf: '#3A8C5F',
+					moss: '#87BC45',
+					soil: '#7D5A50',
+					water: '#4DA6FF',
+					sunlight: '#F9DF74',
+                    dawn: '#FCB97D',
+                    night: '#173F35',
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -70,26 +81,48 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
-				}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+                'leaf-sway': {
+                    '0%, 100%': { transform: 'rotate(-3deg)' },
+                    '50%': { transform: 'rotate(3deg)' },
+                },
+                'float-up': {
+                    '0%': { transform: 'translateY(10px)', opacity: '0' },
+                    '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                'reveal': {
+                    '0%': { transform: 'scaleY(0)', transformOrigin: 'top' },
+                    '100%': { transform: 'scaleY(1)', transformOrigin: 'top' },
+                },
+                'pulse-soft': {
+                    '0%, 100%': { opacity: '1' },
+                    '50%': { opacity: '0.8' },
+                },
+                'shimmer': {
+                    '0%': { backgroundPosition: '-500px 0' },
+                    '100%': { backgroundPosition: '500px 0' },
+                },
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+                'leaf-sway': 'leaf-sway 3s ease-in-out infinite',
+                'float-up': 'float-up 0.5s ease-out forwards',
+                'reveal': 'reveal 0.5s ease-out forwards',
+                'pulse-soft': 'pulse-soft 3s infinite',
+                'shimmer': 'shimmer 2s infinite linear',
+			},
+			backgroundImage: {
+                'jungle-pattern': "url('/patterns/leaves-pattern.svg')",
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                'shimmer-gradient': 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%)',
+            },
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
