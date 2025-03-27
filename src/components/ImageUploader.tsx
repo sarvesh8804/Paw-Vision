@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import { UploadCloud, Image as ImageIcon, X, Camera, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface ImageUploaderProps {
   onImageSelect: (file: File) => void;
@@ -12,6 +13,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect, isProcessi
   const [dragActive, setDragActive] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const isMobile = useIsMobile();
   
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -66,7 +68,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect, isProcessi
       {!preview ? (
         <div 
           className={cn(
-            "relative border-2 border-dashed rounded-2xl transition-all duration-200 p-8",
+            "relative border-2 border-dashed rounded-2xl transition-all duration-200 p-4 md:p-8",
             dragActive 
               ? "border-jungle-canopy bg-jungle-canopy/5" 
               : "border-muted hover:border-jungle-moss/50 hover:bg-jungle-moss/5"
@@ -84,19 +86,19 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect, isProcessi
             className="hidden"
           />
           
-          <div className="flex flex-col items-center justify-center h-64 text-center">
-            <div className="w-20 h-20 bg-jungle-moss/20 rounded-full flex items-center justify-center mb-4 animate-pulse-soft">
-              <UploadCloud className="w-10 h-10 text-jungle-canopy" />
+          <div className="flex flex-col items-center justify-center h-40 md:h-64 text-center">
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-jungle-moss/20 rounded-full flex items-center justify-center mb-3 md:mb-4 animate-pulse-soft">
+              <UploadCloud className="w-8 h-8 md:w-10 md:h-10 text-jungle-canopy" />
             </div>
-            <h3 className="text-lg font-medium">Drag & drop your image here</h3>
-            <p className="text-muted-foreground mb-4 max-w-md">
+            <h3 className="text-base md:text-lg font-medium">Drag & drop your image here</h3>
+            <p className="text-muted-foreground mb-4 max-w-md text-xs md:text-sm">
               Upload a clear photo of an animal to analyze its health condition
             </p>
             
-            <div className="flex gap-3">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-3 w-full justify-center">
               <button
                 onClick={handleButtonClick}
-                className="px-5 py-2.5 rounded-lg bg-jungle-canopy text-white flex items-center gap-2 hover:bg-jungle-canopy/90 transition-colors"
+                className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg bg-jungle-canopy text-white flex items-center justify-center gap-2 hover:bg-jungle-canopy/90 transition-colors text-sm md:text-base w-full md:w-auto"
                 disabled={isProcessing}
               >
                 <ImageIcon className="w-4 h-4" />
@@ -105,7 +107,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect, isProcessi
               
               <button
                 onClick={handleButtonClick}
-                className="px-5 py-2.5 rounded-lg border border-jungle-canopy/20 text-jungle-canopy flex items-center gap-2 hover:bg-jungle-canopy/5 transition-colors"
+                className="px-4 py-2 md:px-5 md:py-2.5 rounded-lg border border-jungle-canopy/20 text-jungle-canopy flex items-center justify-center gap-2 hover:bg-jungle-canopy/5 transition-colors text-sm md:text-base w-full md:w-auto"
                 disabled={isProcessing}
               >
                 <Camera className="w-4 h-4" />
@@ -116,21 +118,21 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect, isProcessi
         </div>
       ) : (
         <div className="relative rounded-2xl overflow-hidden shadow-xl animate-float-up">
-          <div className="absolute top-4 right-4 z-10 flex gap-2">
+          <div className="absolute top-2 right-2 md:top-4 md:right-4 z-10 flex gap-2">
             <button 
               onClick={clearImage}
               className="p-2 rounded-full bg-black/40 text-white backdrop-blur-md hover:bg-black/60 transition-colors"
               disabled={isProcessing}
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 md:w-5 md:h-5" />
             </button>
           </div>
           
           {isProcessing && (
             <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-20">
               <div className="flex flex-col items-center">
-                <Loader2 className="w-12 h-12 text-white animate-spin mb-4" />
-                <p className="text-white font-medium text-lg">Analyzing image...</p>
+                <Loader2 className="w-10 h-10 md:w-12 md:h-12 text-white animate-spin mb-3 md:mb-4" />
+                <p className="text-white font-medium text-base md:text-lg">Analyzing image...</p>
               </div>
             </div>
           )}
@@ -138,12 +140,12 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageSelect, isProcessi
           <img 
             src={preview} 
             alt="Preview" 
-            className="w-full h-auto max-h-[70vh] object-contain bg-black/5"
+            className="w-full h-auto max-h-[50vh] md:max-h-[70vh] object-contain bg-black/5"
           />
         </div>
       )}
       
-      <div className="text-xs text-muted-foreground text-center mt-3">
+      <div className="text-xs text-muted-foreground text-center mt-2 md:mt-3">
         Supported formats: JPG, PNG, WEBP • Max size: 10MB
       </div>
     </div>
