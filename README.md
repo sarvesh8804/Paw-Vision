@@ -1,12 +1,12 @@
-![image](https://github.com/user-attachments/assets/42f2f0a7-7ec4-4ebc-b5da-f2558338bd96)
-
-![image](https://github.com/user-attachments/assets/12f5f2df-84bb-47c1-b889-1e19a13e7dc8)
-
 # Paw-Vision: Animal Injury Detector
 
 ## Project Description
 
 Paw-Vision is an innovative web application designed to detect injuries in animals using a Convolutional Neural Network (CNN) model. This project aims to provide a quick and efficient way to identify potential injuries from animal images, assisting in early intervention and care. The application features a robust backend for model inference and a responsive frontend built with modern web technologies, providing a user-friendly interface for image uploads and injury predictions.
+
+![image](https://github.com/user-attachments/assets/42f2f0a7-7ec4-4ebc-b5da-f2558338bd96)
+
+![image](https://github.com/user-attachments/assets/12f5f2df-84bb-47c1-b889-1e19a13e7dc8)
 
 ## Features
 
